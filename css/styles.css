@@ -45,6 +45,27 @@ h1, h2, h3, h4, h5, h6 {
 article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+.skip {
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+  height: 1px;
+  width: 1px;
+  text-align: left;
+  overflow: hidden;
+  color: red;
+}
+
+a.skip:active, 
+a.skip:focus, 
+a.skip:hover {
+  left: 0; 
+  top: 0;
+  width: auto; 
+  height: auto; 
+  overflow: visible; 
+}
+
 #maincontent {
   background-color: #f3f3f3;
   min-height: 100%;
@@ -126,6 +147,13 @@ nav h1 a {
   font-weight: normal;
   line-height: 1;
   margin: 0 20px;
+}
+label {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  right: -50px;
+  top: 50px;
 }
 .filter-options select {
   background-color: white;
@@ -249,11 +277,14 @@ nav h1 a {
   line-height: 1.1;
 }
 #restaurant-img {
-	width: 100%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 #restaurant-address {
   font-size: 12pt;
   margin: 10px 0px;
+  text-align: center;
 }
 #restaurant-cuisine {
   background-color: #333;
@@ -270,12 +301,15 @@ nav h1 a {
 #restaurant-container, #reviews-container {
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #fff;
-  padding: 140px 40px 30px;
+  padding: 20px 40px 30px;
   width: 100%;
+  
 }
+
 #reviews-container {
   padding: 30px 40px 80px;
 }
+
 #reviews-container h2 {
   color: #f58500;
   font-size: 24pt;
@@ -287,6 +321,9 @@ nav h1 a {
   margin: 0;
   padding: 0;
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
 }
 #reviews-list li {
   background-color: #fff;
@@ -304,4 +341,12 @@ nav h1 a {
 }
 #restaurant-hours td {
   color: #666;
+}
+
+@media only screen and (min-width : 600px) {
+  #reviews-list li {
+  width: 50%; 
+  margin-left: auto;
+  margin-right: auto;
+  }
 }

@@ -61,6 +61,13 @@
   <!-- End footer -->
 
   <!-- Beginning scripts -->
+  <script type="application/javascript">
+    if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js');
+  });
+}
+  </script>
   <!-- Database helpers -->
   <script type="text/javascript" src="js/dbhelper.js"></script>
   <!-- Main javascript file -->

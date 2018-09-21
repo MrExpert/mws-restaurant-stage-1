@@ -35,7 +35,13 @@
       <ul id="restaurants-list"></ul>
     </section>
   </main>
-
+  <script type="application/javascript">
+    if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js');
+  });
+}
+  </script>
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqPVuH2AZhLtasqz_72IR1uxP7T8rF78Q&libraries=places&callback=initMap"></script>

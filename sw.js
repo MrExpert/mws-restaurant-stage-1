@@ -1,28 +1,50 @@
 
-const cacheName = 'restaurant-reviews-v2';
+const cacheName = 'restaurant-reviews-v4';
+
+const cacheAssets = [
+  '/index.html',
+  '/restaurant.html',
+  '/css/styles.css',
+  '/js/dbhelper.js',
+  '/js/main.js',
+  '/js/restaurant_info.js',
+  '/data/restaurants.json',
+  ];
 
 self.addEventListener('install', function(event) {
     event.waitUntil(
-      caches.open(cacheName).then(function(cache) {
-        return cache.addAll([
-          '/index.html',
-          '/restaurant.html',
-          '/css/styles.css',
-          '/js/dbhelper.js',
-          '/js/main.js',
-          '/js/restaurant_info.js',
-          '/data/restaurants.json',
-          ]);
+      caches
+      .open(cacheName)
+      .then(function(cache) {
+        return cache.addAll(cacheAssets);
       })
+      .then(()=>self.skipWaiting())
     );
   });
 
+self.addEventListener('acivate', event => {
+  console.log('ServiceWorker: activated');
+  // Remove unwanted caches
+  e.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cache =>{
+          if(cache !== cacheName){
+            console.log('ServiceWorker: Clearing old cache');
+            return caches.delete(cache);
+          }
+        })
+      )
+    })
+  )
+})
+
+// call Fetch event 
   self.addEventListener('fetch', event => {
-    console.log(event.request.url);
+    console.log('ServiceWorker: fetching');
     event.respondWith(
-      caches.match(event.request).then(cachedResponse => {
-        return cachedResponse || fetch(event.request);
-      })
+      fetch(event.request).catch(()=> caches.match(event.request))
+ 
     );
   });
   

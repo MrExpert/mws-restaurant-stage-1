@@ -38,14 +38,14 @@
   <script type="application/javascript">
     if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js');
+    navigator.serviceWorker.register('sw.js')
+    .then(reg => console.log('ServiceWorker: registered!'))
+        .catch(err => console.log(`ServiceWorker: Error: ${err}`))
   });
 }
   </script>
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
-  <script type="application/javascript" charset="utf-8" src="main2.js"></script>
-
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqPVuH2AZhLtasqz_72IR1uxP7T8rF78Q&libraries=places&callback=initMap"></script>
 
 

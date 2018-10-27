@@ -1,3 +1,6 @@
+import DBHelper from './dbhelper';
+import './sw-register.js';
+
 let restaurant;
 var map;
 

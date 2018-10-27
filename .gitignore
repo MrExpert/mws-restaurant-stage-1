@@ -1,0 +1,11 @@
+
+# ignore dependencies
+node_modules/
+
+# ignore logs
+logs
+*.log
+npm-debug.log*
+
+# ignore dist folder, as this will be built from src folder.
+dist/

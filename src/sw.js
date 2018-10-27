@@ -5,7 +5,6 @@ const cacheAssets = [
   '/index.html',
   '/restaurant.html',
   '/css/styles.css',
-  '/js/dbhelper.js',
   '/js/main.js',
   '/js/restaurant_info.js',
   '/data/restaurants.json',

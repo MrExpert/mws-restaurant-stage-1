@@ -145,8 +145,7 @@ export default class DBHelper {
    * Restaurant image URL.
    */
   static imageUrlForRestaurant(restaurant) {
-    let url = `/img/${(restaurant.photograph||restaurant.id)}-medium.jpg`;
-    return url;
+    return (`/img/${restaurant.photograph}`);
   }
 
   static imageSrcsetForRestaurant(restaurant) {

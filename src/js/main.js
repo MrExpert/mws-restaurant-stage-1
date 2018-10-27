@@ -25,6 +25,7 @@ const fetchNeighborhoods = () => {
     } else {
       self.neighborhoods = neighborhoods;
       fillNeighborhoodsHTML();
+      console.log(neighborhoods);
     }
   });
 }
@@ -99,12 +100,12 @@ const updateRestaurants = () => {
   const cuisine = cSelect[cIndex].value;
   const neighborhood = nSelect[nIndex].value;
 
-  const fetchRestaurantByCuisineAndNeighborhood = (cuisine, neighborhood, (error, restaurants) => {
+   DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, (error, restaurants) => {
     if (error) { // Got an error!
       console.error(error);
     } else {
       resetRestaurants(restaurants);
-      fillRestaurantsHTML();
+      fillRestaurantsHTML(restaurants);
     }
   })
 }
@@ -118,11 +119,16 @@ const resetRestaurants = (restaurants) => {
   const ul = document.getElementById('restaurants-list');
   ul.innerHTML = '';
 
+  
   // Remove all map markers
-  self.markers.forEach(m => m.setMap(null));
-  self.markers = [];
-  self.restaurants = restaurants;
+if (self.markers) {
+  self.markers.forEach(marker => marker.remove());
 }
+self.markers = [];
+self.restaurants = restaurants;
+}
+
+
 
 /**
  * Create all restaurants HTML and add them to the webpage.

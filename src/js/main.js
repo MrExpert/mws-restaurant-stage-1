@@ -1,5 +1,5 @@
 import DBHelper from './dbhelper';
-import './sw-register.js';
+// import './sw-register.js';
 
 let restaurants,
   neighborhoods,

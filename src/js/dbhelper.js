@@ -178,7 +178,7 @@ export default class DBHelper {
   // }
 
   static imageUrlForRestaurant(restaurant) {
-    let url = `/img/${(restaurant.photograph.split('.')[0]||restaurant.id)}-medium.jpg`;
+    let url = `/img/${(restaurant.photograph||restaurant.id)}-medium.jpg`;
     return url;
   }
 

@@ -1,5 +1,7 @@
 import DBHelper from './dbhelper';
 import './sw-register.js';
+import favoriteButton from './favorite-button';
+
 
 let restaurant;
 var map;
@@ -73,6 +75,10 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
   // fill reviews
   DBHelper.fetchReviewsByRestaurantId(restaurant.id)
     .then(fillReviewsHTML);
+  
+    // add fav icon
+    const favButtonContainer = document.getElementById('fav-button-container');
+    favButtonContainer.append( favoriteButton(restaurant) );
 }
 
 /**

@@ -1,5 +1,7 @@
 import DBHelper from './dbhelper';
 import './sw-register.js';
+import favoriteButton from './favorite-button';
+
 
 let restaurants,
   neighborhoods,
@@ -153,6 +155,9 @@ const createRestaurantHTML = (restaurant) => {
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
   li.append(image);
 
+  const favButton = favoriteButton(restaurant);
+  li.append(favButton);
+
   const name = document.createElement('h3');
   name.innerHTML = restaurant.name;
   li.append(name);
@@ -168,7 +173,7 @@ const createRestaurantHTML = (restaurant) => {
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
-  li.append(more)
+  li.append(more);
 
   return li
 }

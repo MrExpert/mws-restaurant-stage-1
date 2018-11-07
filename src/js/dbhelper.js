@@ -128,7 +128,7 @@ export default class DBHelper {
   }
 
 
-  // in src/js/dbhelper.js inside the DBHelper class
+  // in fetching review by restaurant id
   static fetchReviewsByRestaurantId(restaurant_id) {
     return fetch(`${DBHelper.API_URL}/reviews/?restaurant_id=${restaurant_id}`).then(response => {
       if (!response.ok) return Promise.reject("Reviews couldn't be fetched from network");

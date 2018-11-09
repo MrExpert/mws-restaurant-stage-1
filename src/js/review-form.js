@@ -151,7 +151,7 @@ export default function reviewForm(restaurantId) {
   const textarea = document.createElement('textarea');
   textarea.id = "comments";
   textarea.setAttribute('aria-label', 'comments');
-  textarea.setAttribute('placeholder', 'Enter any comments here');
+  textarea.setAttribute('placeholder', 'Enter comments here');
   textarea.setAttribute('rows', '10');
   p.appendChild(textarea);
   form.appendChild(p);

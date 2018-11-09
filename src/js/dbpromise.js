@@ -2,15 +2,16 @@ import idb from "idb";
 
 const dbPromise = {
   // creation and updating of database happens here.
-  db: idb.open('restaurant-reviews-db', 3, function (upgradeDb) {
+  db: idb.open('restaurant-reviews-db', 30, function (upgradeDb) {
     switch (upgradeDb.oldVersion) {
       case 0:
         upgradeDb.createObjectStore('restaurants', { keyPath: 'id' });
-        case 1:
+      case 1:
         upgradeDb.createObjectStore('reviews', { keyPath: 'id' })
           .createIndex('restaurant_id', 'restaurant_id');  
     }
   }),
+
 
   /**
    * Save a restaurant or array of restaurants into idb, using promises.

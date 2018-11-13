@@ -2,16 +2,13 @@ import idb from "idb";
 
 const dbPromise = {
   // creation and updating of database happens here.
-  db: idb.open('restaurant-reviews-db', 31, function (upgradeDb) {
+  db: idb.open('restaurant-reviews-db', 30, function (upgradeDb) {
     switch (upgradeDb.oldVersion) {
       case 0:
         upgradeDb.createObjectStore('restaurants', { keyPath: 'id' });
       case 1:
         upgradeDb.createObjectStore('reviews', { keyPath: 'id' })
           .createIndex('restaurant_id', 'restaurant_id');  
-      case 2:
-        upgradeDb.createObjectStore('deffered-reviews', { keyPath: 'restaurant_id' });
-
     }
   }),
 
@@ -67,25 +64,6 @@ const dbPromise = {
     });
   },
 
-/**
-   * Save a Deffered review or array of reviews into idb, using promises
-   */
-  putDefferedReviews(reviews) {
-    
-    console.log(reviews);
-
-    return this.db.then(db => {
-      
-      const store = db.transaction('reviews', 'readwrite').objectStore('reviews');
-      console.log(reviews);
-      reviews.id = 1000;
-
-      store.put(reviews);
-      return store.complete;
-
-    });
-  },
-
   /**
    * Get all reviews for a specific restaurant, by its id, using promises.
    */
@@ -93,17 +71,6 @@ const dbPromise = {
     return this.db.then(db => {
       const storeIndex = db.transaction('reviews').objectStore('reviews').index('restaurant_id');
       return storeIndex.getAll(Number(id));
-    });
-  },
-
- /**
-   * Get all reviews for a specific restaurant, by its id, using promises.
-   */
-  getDefferedReviewsForRestaurant(id) {
-    return this.db.then(db => {
-      const storeIndex = db.transaction('deffered-reviews').objectStore('deffered-reviews').index('restaurant_id');
-      console.log(id);
-      return storeIndex.getAll(Number(id)).then(reviews => reviews);
     });
   },
 

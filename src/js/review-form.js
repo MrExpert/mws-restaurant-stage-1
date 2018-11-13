@@ -94,9 +94,11 @@ function handleSubmit(e) {
     body: JSON.stringify(review)
   };
 
-  // TODO: use Background Sync to sync data with API server
+  // 
   return fetch(url, POST).then(response => {
+    
     if (!response.ok) return Promise.reject("We couldn't post review to server.");
+    
     return response.json();
   }).then(newNetworkReview => {
     // save new review on idb
@@ -105,6 +107,14 @@ function handleSubmit(e) {
     const reviewList = document.getElementById('reviews-list');
     const review = createReviewHTML(newNetworkReview);
     reviewList.appendChild(review);
+    // clear form
+    clearForm();
+  })
+  .catch( e => {
+    dbPromise.putDefferedReviews(review);
+    const reviewList = document.getElementById('reviews-list');
+    const reviewElement = createReviewHTML(review);
+    reviewList.appendChild(reviewElement);
     // clear form
     clearForm();
   });

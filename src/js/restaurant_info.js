@@ -2,6 +2,7 @@ import DBHelper from './dbhelper';
 import './sw-register.js';
 import favoriteButton from './favorite-button';
 import reviewForm from './review-form';
+import dbPromise from "./dbpromise";
 
 
 
@@ -77,6 +78,10 @@ const fillRestaurantHTML = (restaurant = self.restaurant) => {
   // fill reviews
   DBHelper.fetchReviewsByRestaurantId(restaurant.id)
     .then(fillReviewsHTML);
+  // fill deffered reviews
+  //dbPromise.getDefferedReviewsForRestaurant(restaurant.id)          
+  //.then(r => {console.log(r);});
+
   
     // add fav icon
     const favButtonContainer = document.getElementById('fav-button-container');
@@ -180,3 +185,37 @@ const getParameterByName = (name, url) => {
     return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
+
+
+// checking for online status
+
+window.addEventListener('online', function(e) { 
+  
+  //dbPromise.getReviewsForRestaurant();
+  dbPromise.getReviewsForRestaurant(this.restaurant.id).then(idbReviews => {
+    // if no reviews were found on idb return null
+    if (idbReviews.length < 1) return null;
+    for (const r of idbReviews) {
+      if (r.id == 1000){
+        delete r.id;
+        const url = `${DBHelper.API_URL}/reviews/`;
+        const POST = {
+          method: 'POST',
+          body: JSON.stringify(r)
+        };
+
+        
+        
+        
+        return fetch(url, POST).then(response => {
+    
+          if (!response.ok) return Promise.reject("We couldn't post review to server.");
+          
+          return response.json();
+        });
+        
+      }
+    }
+});
+
+});

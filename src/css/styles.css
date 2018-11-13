@@ -72,7 +72,7 @@ a.skip:hover {
   width: 100%;
 }
 #footer {
-  background-color: #444;
+  background-color: #000;
   color: #aaa;
   font-size: 8pt;
   letter-spacing: 1px;
@@ -120,7 +120,7 @@ nav h1 a {
 
 /* Add a color to all links inside the list */
 #breadcrumb li a {
-    color: #0275d8;
+    color: #023766;
     text-decoration: none;
 }
 
@@ -267,7 +267,7 @@ label {
   width: 100%;
 }
 #restaurant-name {
-  color: #f18200;
+  color: #462602;
   font-family: Arial,sans-serif;
   font-size: 20pt;
   font-weight: 200;
@@ -359,7 +359,7 @@ font-size: 1.5em;
   }
   /* Button style when button is toggled */
   button.fav[aria-pressed=true] {
-    color: red;
+    color: #8b0000;
   }
   /* Accessible and easy to spot styles for our buttons when hovered and focused */
   button.fav:hover,
